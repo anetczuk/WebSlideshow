@@ -10,11 +10,15 @@ from DrawerWindow import DrawerWindow
 from ImageGrabber import ImageGrabberThread
 
 import argparse
+import importlib
 
 ##from provider.UrlProvider import ExampleProvider
-from provider.Demotywatory import Demotywatory
-from provider.Break import Break
-from provider.Nasa import Nasa
+
+
+
+def import_module( moduleName, className ):
+    mod = importlib.import_module( moduleName )
+    return getattr(mod, className)
 
 
 #
@@ -40,9 +44,7 @@ class MainWin:
 
 if __name__ == "__main__":    
     parser = argparse.ArgumentParser(description='Display internet gallery.')
-    parser.add_argument('--Demoty', action='store_const', const=True, default=True, help='Use www.demotywatory.pl gallery (default)' )
-    parser.add_argument('--Nasa', action='store_const', const=True, help='Use https://apod.nasa.gov/apod/random_apod.html gallery' )
-    parser.add_argument('--Break', action='store_const', const=True, help='Use www.break.com/pictures gallery' )
+    parser.add_argument('--provider', action='store', default="Demotywatory", help='Load given image provider' )
     parser.add_argument('--random', action='store_const', const=True, default=False, help="Gallery random mode (if supporting)" )
     parser.add_argument('--dtime', action='store', default=10, help="Display time of single image [s]" )
     parser.add_argument('--nofs', action='store_const', const=True, default=False, help='No fullscreen at startup' )
@@ -52,17 +54,12 @@ if __name__ == "__main__":
     
     randomMode = args.random
     
-    provider = None
-    if args.Demoty is True:
-        provider = Demotywatory( randomMode )
-    if args.Nasa is True:
-        provider = Nasa()
-    if args.Gag9 is True:
-        provider = Gag9()
-    if args.Break is True:
-        provider = Break()
-    if args.Ciastka is True:
-        provider = Ciastko( randomMode )
+    print "Loading provider:", args.provider
+    
+    providerMod = "provider." + args.provider
+    mod = import_module( providerMod, args.provider )
+    
+    provider = mod()
     
     mainW = MainWin(not args.nofs)
     mainW.setProvider( provider )
