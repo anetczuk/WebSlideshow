@@ -22,6 +22,7 @@ from UrlProvider import UrlProvider
 import lxml.html
 import random
 import datetime, time
+import logging
 
 
 
@@ -38,7 +39,7 @@ class Nasa(UrlProvider):
         body = self.getPageBody( url )
         urlList = self.parsePage(self.randomUrlBase, body)
         if (len(urlList) < 1):
-            print "No url found"
+            logging.warning("No url found")
             return ""
         return urlList[0]
 

@@ -11,6 +11,7 @@ from ImageGrabber import ImageGrabberThread
 
 import argparse
 import importlib
+import logging
 
 ##from provider.UrlProvider import ExampleProvider
 
@@ -48,13 +49,20 @@ if __name__ == "__main__":
     parser.add_argument('--random', action='store_const', const=True, default=False, help="Gallery random mode (if supporting)" )
     parser.add_argument('--dtime', action='store', default=10, help="Display time of single image [s]" )
     parser.add_argument('--nofs', action='store_const', const=True, default=False, help='No fullscreen at startup' )
+    parser.add_argument('--loglevel', action='store', help='Set log level' )
 
     args = parser.parse_args()
-    print "Args:", args
+    
+    if args.loglevel:
+        print "Level:", args.loglevel
+        llevel = getattr(logging, args.loglevel)
+        logging.basicConfig(level=llevel)
+    
+    logging.info("Args: %s", args)
     
     randomMode = args.random
     
-    print "Loading provider:", args.provider
+    logging.info("Loading provider: %s", args.provider)
     
     providerMod = "provider." + args.provider
     mod = import_module( providerMod, args.provider )

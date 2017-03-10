@@ -117,8 +117,6 @@ class AnimationPlayer(gobject.GObject):
     
     def stop(self):
         scopeLock = ScopeLock(self.mutex)
-        ## if (self.animIter is not None):
-        ##     print "Stopping"
         self.animIter = None
     
     def frame_timeout(self):

@@ -20,6 +20,8 @@
 from StringIO import StringIO
 import pycurl
 import exceptions
+import logging
+
 
 
 class UrlProvider:
@@ -38,7 +40,7 @@ class UrlProvider:
             c.setopt(c.FOLLOWLOCATION, True)        ## follow redirects
             c.perform()
         except Exception as err:
-            print "Unexpected exception:", err
+            logging.exception("Unexpected exception")
             return ""
         finally:
             c.close()

@@ -20,7 +20,7 @@
 from UrlProvider import UrlProvider
 
 import lxml.html
-
+import logging
 
 
 
@@ -54,7 +54,7 @@ class DemotGalleryBrowser(UrlProvider):
             
         if (len(self.images) < 1):
             ## end of images
-            print "No more images in gallery"
+            logging.warning("No more images in gallery")
             return ""
         
         url = self.images.pop(0)
@@ -119,14 +119,14 @@ class Demotywatory(UrlProvider):
             if provider.isEmpty():
                 self.providers.pop(0)
             return provider.provideUrl()
-        print "Empty providers list"
+        logging.warning("Empty providers list")
         return ""
     
     def randomUrl(self):
         body = self.getPageBody( 'http://demotywatory.pl/losuj' )
         urlList = self.parseRandomPage(body)
         if (len(urlList) < 1):
-            print "No url found"
+            logging.warning("No url found")
             return ""
         return urlList[0]
     
@@ -153,7 +153,7 @@ class Demotywatory(UrlProvider):
                 ## gallery case            
                 aTags = elem.xpath("./a[contains(@class, 'picwrapper')]")
                 if len(aTags)<1:
-                    print "Invalid 'a' tag"
+                    logging.error("Invalid 'a' tag")
                     continue
                 aElem = aTags[0]
                 url = aElem.get("href")
@@ -167,7 +167,7 @@ class Demotywatory(UrlProvider):
             
             imgTags = elem.xpath(".//img")
             if len(imgTags)<1:
-                print "Invalid 'img' tag"
+                logging.error("Invalid 'img' tag")
                 continue
             img = imgTags[0]
             url = img.get("src")

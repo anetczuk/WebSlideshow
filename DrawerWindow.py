@@ -24,6 +24,7 @@ import gtk, gobject
 from gtk import Image
 
 import urllib2
+import logging
 
 from PixbufDrawer import PixbufAnimationDrawer
 
@@ -31,17 +32,18 @@ from PixbufDrawer import PixbufAnimationDrawer
 
 def loaderFromUrl( imageUrl ):
     print "Opening:", imageUrl
+    logging.info("Opening: %s", imageUrl)
     
     try:
         response = urllib2.urlopen( imageUrl )
     except urllib2.HTTPError as err:
-        print "Unable to open url:", imageUrl, "code:", err.code
+        logging.exception("Unable to open url: %s", imageUrl)
         return None
     except ValueError as err:
-        print "Unable to open url: ", imageUrl, "exception:", err
+        logging.exception("Unable to open url: %s", imageUrl)
         return None
     except:
-        print "Unexpected error when opening url: ", imageUrl
+        logging.exception("Unexpected error when opening url: %s", imageUrl)
         raise
 
     loader=gtk.gdk.PixbufLoader()
@@ -51,9 +53,9 @@ def loaderFromUrl( imageUrl ):
         loader.write( resp )            ## raises GError
         loader.close()                  ## raises GError
     except gobject.GError as err:
-        print "Error while writing response:", err, "data type:", type(resp)
+        logging.exception("Error while writing response, received data type: %", type(resp))
     except:
-        print "Unexpected error while writing response:\n", resp
+        logging.exception("Unexpected error while writing response:\n%s", resp)
         raise
     
     return loader
@@ -87,7 +89,7 @@ class DrawerWindow(gobject.GObject):
         self.window.show_all()
 
     def destroy(self, widget, data=None):
-        print "Destroy signal occurred"
+        logging.log( "Destroy signal occurred" )
         gtk.main_quit()
         
     def on_key_press(self, widget, ev, data=None):

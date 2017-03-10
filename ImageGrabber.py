@@ -18,6 +18,8 @@
 #
 
 import threading, time
+import logging
+
 
 
 class Sleeper:
@@ -51,10 +53,10 @@ class ImageGrabberThread(threading.Thread):
 
     def playPause(self, window):
         if self.playEvent.is_set() is True:
-            print "pause"
+            logging.info("pause")
             self.playEvent.clear();
         else:
-            print "resume"
+            logging.info("resume")
             self.playEvent.set()
 
     def run(self):
@@ -75,13 +77,13 @@ class ImageGrabberThread(threading.Thread):
     def getUrl(self):
         while True:
             if self.urlProvider is None:
-                print "No url provider"
+                logging.warning("No url provider")
                 time.sleep(1)
                 continue
             
             newUrl = self.urlProvider.provideUrl()
             if newUrl == "":
-                print "Url not provided"
+                logging.warning("Url not provided")
                 time.sleep(1)
                 continue
             

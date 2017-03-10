@@ -20,6 +20,8 @@
 from UrlProvider import UrlProvider
 
 import lxml.html
+import logging
+
 
 
 class BreakArticleBrowser(UrlProvider):
@@ -27,7 +29,7 @@ class BreakArticleBrowser(UrlProvider):
         UrlProvider.__init__(self)
         self.article = articleUrl
         self.nextElem = articleUrl
-        print "Starting article:", self.article
+        logging.info("Starting article: %s", self.article)
 
     def provideUrl(self): 
         if (self.nextElem is None) or (self.nextElem == ""):
@@ -68,7 +70,7 @@ class BreakArticleBrowser(UrlProvider):
         
         self.nextElem = nextPage[0].get("href")
         if (self.nextElem == self.article):
-            print "Returning article's last url"
+            logging.info("Returning article's last url")
             self.nextElem = None
             return imgUrl
         
@@ -93,7 +95,7 @@ class Break(UrlProvider):
         url = self.artProvider.provideUrl()
         if (url == ""):
             ## no more images for article
-            print "No more images in article"
+            logging.warning("No more images in article")
             self.artProvider = None
             
         return url
@@ -103,7 +105,7 @@ class Break(UrlProvider):
             self.loadArticles()
             ##print "Loaded articles:", self.articles
         if (len(self.articles) < 1):
-            print "Could not load articles list"
+            logging.warning("Could not load articles list")
             self.artProvider = None
             return
         if self.artProvider is None:
