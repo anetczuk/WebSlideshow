@@ -56,13 +56,13 @@ class UrlProvider:
 
 
 class ExampleProvider(UrlProvider):
-    def __init__(self):
+    def __init__(self, randomMode = False):
         UrlProvider.__init__(self)
         self.counter = 0
         self.list = [ 'http://www.dailygalaxy.com/photos/uncategorized/2007/05/05/planet_x.jpg', 
                       'https://www.w3schools.com/css/img_fjords.jpg' ]
 
-    def provideUrl(self): 
+    def provideUrl(self):
         ## implement
         lSize = len(self.list)
         elem = self.counter % lSize

@@ -80,7 +80,12 @@ class BreakArticleBrowser(UrlProvider):
         
 
 class Break(UrlProvider):
-    def __init__(self):
+    #
+    # random mode not supported
+    #
+    def __init__(self, randomMode = False):
+        if (randomMode is True):
+            logging.info("Random mode not supported")
         UrlProvider.__init__(self)
         self.baseUrl = "http://www.break.com/pictures/"
         self.articles = []

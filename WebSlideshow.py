@@ -65,9 +65,9 @@ if __name__ == "__main__":
     logging.info("Loading provider: %s", args.provider)
     
     providerMod = "provider." + args.provider
-    mod = import_module( providerMod, args.provider )
+    providerClass = import_module( providerMod, args.provider )
     
-    provider = mod()
+    provider = providerClass( randomMode )              ## call constructor
     
     mainW = MainWin(not args.nofs)
     mainW.setProvider( provider )
