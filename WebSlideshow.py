@@ -8,6 +8,7 @@ import pygtk, gtk
 
 from DrawerWindow import DrawerWindow
 from ImageGrabber import ImageGrabberThread
+from ScreenSaverDisabler import ScreenSaverDisabler
 
 import argparse
 import importlib
@@ -27,6 +28,9 @@ def import_module( moduleName, className ):
 #
 class MainWin:
     def __init__(self, fullscreen):
+        ## disable screen saver
+        self.screensaver = ScreenSaverDisabler()
+        
         self.imgWindow = DrawerWindow(fullscreen)
         self.thread = ImageGrabberThread( self.imgWindow )
         ##self.thread.urlProvider = ExampleProvider()
@@ -41,7 +45,7 @@ class MainWin:
         self.thread.start()
         gtk.gdk.threads_init()          ## run threads
         gtk.main()
-
+        
 
 if __name__ == "__main__":    
     parser = argparse.ArgumentParser(description='Display internet gallery.')
@@ -52,13 +56,15 @@ if __name__ == "__main__":
     parser.add_argument('--loglevel', action='store', help='Set log level' )
 
     args = parser.parse_args()
-    
+        
     if args.loglevel:
-        print "Level:", args.loglevel
         llevel = getattr(logging, args.loglevel)
         logging.basicConfig(level=llevel)
     
     logging.info("Args: %s", args)
+    
+    if args.loglevel:
+        print "Log level:", args.loglevel
     
     randomMode = args.random
     

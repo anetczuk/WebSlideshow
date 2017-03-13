@@ -89,7 +89,7 @@ class DrawerWindow(gobject.GObject):
         self.window.show_all()
 
     def destroy(self, widget, data=None):
-        logging.log( "Destroy signal occurred" )
+        logging.info( "Destroy signal occurred" )
         gtk.main_quit()
         
     def on_key_press(self, widget, ev, data=None):
