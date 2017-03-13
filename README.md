@@ -26,7 +26,8 @@ List of features:
 - fullscreen / windowed mode (key F11),
 - play / pause (key Space),
 - controlling display time (command line),
-- playing directly from RAM (no store to hard drive).
+- playing directly from RAM (no store to hard drive),
+- disable screensaver if needed (restore settings on exit).
 
 
 ### Adding new provider
