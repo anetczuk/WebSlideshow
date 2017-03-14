@@ -60,13 +60,18 @@ class ImageGrabberThread(threading.Thread):
             self.playEvent.set()
 
     def run(self):
-        newUrl = self.getUrl()
+        newUrl = self.getNextUrl()
         while True:
             sleeper = Sleeper()
             
-            self.display.openUrl( newUrl )
+            loaded = self.display.openUrl( newUrl )
             
-            newUrl = self.getUrl()
+            newUrl = self.getNextUrl()
+
+            if loaded == False:
+	      ## could not load image
+	      sleeper.sleep(1)
+	      continue
             
             if self.playEvent.is_set() is False:
                 self.playEvent.wait()
@@ -74,17 +79,18 @@ class ImageGrabberThread(threading.Thread):
             sleeper.sleep(self.waitTime)
         
         
-    def getUrl(self):
+    def getNextUrl(self):
         while True:
             if self.urlProvider is None:
                 logging.warning("No url provider")
                 time.sleep(1)
                 continue
             
+            sleeper = Sleeper()
             newUrl = self.urlProvider.provideUrl()
             if newUrl == "":
                 logging.warning("Url not provided")
-                time.sleep(1)
+                sleeper.sleep(1)
                 continue
             
             return newUrl
