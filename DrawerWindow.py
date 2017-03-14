@@ -55,7 +55,7 @@ def loaderFromUrl( imageUrl ):
     except gobject.GError as err:
         logging.exception("Error while writing response, received data type: %", type(resp))
     except:
-        logging.exception("Unexpected error while writing response:\n%s", resp)
+        logging.exception("Unexpected error while writing response")
         raise
     
     return loader
@@ -112,7 +112,7 @@ class DrawerWindow(gobject.GObject):
     def openUrl(self, imageUrl):
         loader = loaderFromUrl(imageUrl)
         if (loader is None):
-            return None
+            return False
         anim = loader.get_animation()        
         self.area.set_from_animation(anim)
         return True
