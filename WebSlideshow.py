@@ -27,11 +27,17 @@ import argparse
 import importlib
 import logging
 
+import ntpath
+
 ##from provider.UrlProvider import ExampleProvider
 
 
 
-def import_module( moduleName, className ):
+def import_module( path ):
+    moduleName = path.replace("/", ".")
+    className = ntpath.basename( path )
+    
+    logging.info("importing module: %s %s", moduleName, className)
     mod = importlib.import_module( moduleName )
     return getattr(mod, className)
 
@@ -83,8 +89,7 @@ if __name__ == "__main__":
     
     logging.info("Loading provider: %s", args.provider)
     
-    providerMod = "provider." + args.provider
-    providerClass = import_module( providerMod, args.provider )
+    providerClass = import_module( "provider/" + args.provider )
     
     provider = providerClass( randomMode )              ## call constructor
     
