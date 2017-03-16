@@ -1,3 +1,4 @@
 **/*.pyc
 .kdev4/
 WebSlideshow.kdev4
+provider/private
