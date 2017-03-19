@@ -69,9 +69,14 @@ class DrawerWindow(gobject.GObject):
     def __init__(self, fullscreen = False):
         gobject.GObject.__init__(self)
         
+        self.window = gtk.Window(gtk.WINDOW_TOPLEVEL)
+        ### logging.info("screen instance: %s", self.window.get_screen())
+        if self.window.get_screen() is None:
+            logging.fatal("could not initialize window properly (no X server?)")
+            quit(1)
+        
         self.area = PixbufAnimationDrawer()
         
-        self.window = gtk.Window(gtk.WINDOW_TOPLEVEL)
         bgcol = gtk.gdk.Color('#000')
         self.window.modify_bg(gtk.STATE_NORMAL, bgcol)
         self.window.connect("destroy", self.destroy)
