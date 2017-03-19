@@ -60,23 +60,32 @@ class ImageGrabberThread(threading.Thread):
             self.playEvent.set()
 
     def run(self):
-        newUrl = self.getNextUrl()
         while True:
-            sleeper = Sleeper()
-            
-            loaded = self.display.openUrl( newUrl )
-            
+            self.iterateImages()
+            ## iteration stopped due to exception -- wait some time to restore
+            time.sleep(5)
+        
+    def iterateImages(self):
+        try:
             newUrl = self.getNextUrl()
+            while True:
+                sleeper = Sleeper()
+                
+                loaded = self.display.openUrl( newUrl )
+                
+                newUrl = self.getNextUrl()
 
-            if loaded == False:
-	      ## could not load image
-	      sleeper.sleep(1)
-	      continue
-            
-            if self.playEvent.is_set() is False:
-                self.playEvent.wait()
-            
-            sleeper.sleep(self.waitTime)
+                if loaded == False:
+                    ## could not load image
+                    sleeper.sleep(1)
+                    continue
+                
+                if self.playEvent.is_set() is False:
+                    self.playEvent.wait()
+                
+                sleeper.sleep(self.waitTime)        
+        except:
+            logging.exception("Error while providing next image")
         
         
     def getNextUrl(self):
