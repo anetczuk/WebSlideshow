@@ -27,6 +27,7 @@ import urllib2
 import logging
 
 from PixbufDrawer import PixbufAnimationDrawer
+from socket import error as SocketError
 
 
 
@@ -42,9 +43,10 @@ def loaderFromUrl( imageUrl ):
     except ValueError as err:
         logging.exception("Unable to open url: %s", imageUrl)
         return None
-    except:
-        logging.exception("Unexpected error when opening url: %s", imageUrl)
-        raise
+    except SocketError as sockerr:
+        logging.exception("Error when opening url: %s, reason: %s", imageUrl, sockerr)
+        return None
+
 
     loader=gtk.gdk.PixbufLoader()
     ##pixbufanim = gtk.gdk.PixbufAnimation("goalie.gif")

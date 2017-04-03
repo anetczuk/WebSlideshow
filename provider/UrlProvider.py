@@ -31,6 +31,9 @@ class UrlProvider:
         ## implement
         return ""
     
+    ##
+    ## Method should return valid page body or throw an exception.
+    ##
     def getPageBody(self, target_url):
         buffer = StringIO()
         try:
@@ -40,8 +43,9 @@ class UrlProvider:
             c.setopt(c.FOLLOWLOCATION, True)        ## follow redirects
             c.perform()
         except Exception as err:
-            logging.exception("Unexpected exception")
-            return ""
+            ##logging.exception("Unexpected exception")
+            ##return ""
+            raise
         finally:
             c.close()
             
