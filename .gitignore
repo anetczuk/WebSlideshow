@@ -1,7 +1,8 @@
 **/*.pyc
 .kdev4/
 WebSlideshow.kdev4
-provider/private
+src/provider/private
+test/provider/private
 /.project
 /.pydevproject
 /.settings/
