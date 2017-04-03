@@ -118,6 +118,7 @@ class AnimationPlayer(gobject.GObject):
     def stop(self):
         scopeLock = ScopeLock(self.mutex)
         self.animIter = None
+        scopeLock.release()
     
     def frame_timeout(self):
         scopeLock = ScopeLock(self.mutex)

@@ -43,8 +43,8 @@ class BreakArticleBrowser(UrlProvider):
 
     def parseArticle(self, body):
         inlineBody = body.replace("\r\n", " ")
-        inlineBody = body.replace('\r', " ")
-        inlineBody = body.replace('\n', " ")
+        inlineBody = inlineBody.replace('\r', " ")
+        inlineBody = inlineBody.replace('\n', " ")
         ## print "Body:\n", inlineBody
         
         lxmlSite = lxml.html.fromstring(inlineBody)
@@ -127,8 +127,8 @@ class Break(UrlProvider):
     
     def parseArticles(self, body):
         inlineBody = body.replace("\r\n", " ")
-        inlineBody = body.replace('\r', " ")
-        inlineBody = body.replace('\n', " ")
+        inlineBody = inlineBody.replace('\r', " ")
+        inlineBody = inlineBody.replace('\n', " ")
         ## print "Body:\n", inlineBody
         
         lxmlSite = lxml.html.fromstring(inlineBody)

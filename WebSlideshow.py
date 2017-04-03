@@ -17,7 +17,8 @@
 # 
 #
 
-import pygtk, gtk
+# import pygtk, gtk
+import gtk
 
 from DrawerWindow import DrawerWindow
 from ImageGrabber import ImageGrabberThread

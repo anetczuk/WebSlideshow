@@ -19,7 +19,7 @@
 
 import logging
 
-import shlex
+# import shlex
 from subprocess import Popen, PIPE
 import re
 
@@ -33,8 +33,8 @@ class ScreenSaverDisabler:
         self.properlyInit = False
         ## read state
         out = self.__call('xset q')
-        ##if re.search('^F..m:', line) :
         ##print out
+        ##if re.search('^F..m:', line) :
         ## find timeout
         timeoutList = re.findall('.*timeout:\W+(\w+)\W+.*', out)
         ## print "Found:", timeoutList
@@ -80,7 +80,10 @@ class ScreenSaverDisabler:
     def __call(self, cmd):
         ##print "Calling:", cmd
         proc = Popen(cmd, stdout=PIPE, stderr=PIPE, shell=True)
-        out, err = proc.communicate()
+        out = proc.communicate()
+        ## out, err = proc.communicate()
         ## print "Output:", out, err
         ## exitcode = proc.returncode
-        return out
+        
+        ## out[1] is error code
+        return out[0]

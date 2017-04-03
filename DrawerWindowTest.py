@@ -20,7 +20,8 @@
 import unittest
 
 from DrawerWindow import DrawerWindow
-import pygtk, gtk
+# import pygtk, gtk
+import gtk
 
 
 class DrawerWindowTest(unittest.TestCase):
@@ -34,14 +35,13 @@ class DrawerWindowTest(unittest.TestCase):
 
     def xtest_displayJpg(self):
         window = DrawerWindow()
-        url = "http://pokazcyckidamciciastko.pl/upload/20130909133538.jpg"
+        url = "http://upload.wikimedia.org/wikipedia/commons/5/57/PT05_ubt.jpeg"
         window.openUrl(url)
         gtk.main()
     
-    def test_displayAnimGiff(self):
+    def xtest_displayAnimGiff(self):
         window = DrawerWindow(True)
-        ##url = "http://pokazcyckidamciciastko.pl/upload/20131116160949.gif"
-        url = "https://img-9gag-fun.9cache.com/photo/agLnA2g_460sv.mp4"
+        url = "https://articulate-heroes.s3.amazonaws.com/uploads/rte/kgrtehja_DancingBannana.gif"
         window.openUrl(url)
         gtk.main()
 

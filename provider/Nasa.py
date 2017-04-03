@@ -68,8 +68,8 @@ class Nasa(UrlProvider):
 
     def parsePage(self, urlBase, body):
         inlineBody = body.replace("\r\n", " ")
-        inlineBody = body.replace('\r', " ")
-        inlineBody = body.replace('\n', " ")
+        inlineBody = inlineBody.replace('\r', " ")
+        inlineBody = inlineBody.replace('\n', " ")
         ## print "Body:\n", inlineBody
         
         lxmlSite = lxml.html.fromstring(inlineBody)

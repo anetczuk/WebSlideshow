@@ -56,9 +56,9 @@ class BreakTest(unittest.TestCase):
 
     def test_articles(self):
         provider = Break()
-        list = provider.loadArticles()
-        ##print "List:", list
-        self.assertGreater(len(list), 0)
+        artList = provider.loadArticles()
+        ##print "List:", artList
+        self.assertGreater(len(artList), 0)
         
     def test_provide(self):
         provider = Break()

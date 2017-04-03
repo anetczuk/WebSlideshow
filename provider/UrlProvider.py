@@ -19,8 +19,8 @@
 
 from StringIO import StringIO
 import pycurl
-import exceptions
-import logging
+# import exceptions
+# import logging
 
 
 
@@ -35,21 +35,20 @@ class UrlProvider:
     ## Method should return valid page body or throw an exception.
     ##
     def getPageBody(self, target_url):
-        buffer = StringIO()
+        dataBuffer = StringIO()
         try:
             c = pycurl.Curl()
             c.setopt(c.URL, target_url)
-            c.setopt(c.WRITEDATA, buffer)
+            c.setopt(c.WRITEDATA, dataBuffer)
             c.setopt(c.FOLLOWLOCATION, True)        ## follow redirects
             c.perform()
-        except Exception as err:
-            ##logging.exception("Unexpected exception")
-            ##return ""
-            raise
+#         except Exception as err:
+#             logging.exception("Unexpected exception")
+#             return ""
         finally:
             c.close()
             
-        bodyOutput = buffer.getvalue()
+        bodyOutput = dataBuffer.getvalue()
         
         # Body is a string in some encoding.
         # In Python 2, we can print it without knowing what the encoding is.

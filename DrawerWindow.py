@@ -21,7 +21,7 @@ import pygtk
 pygtk.require('2.0')
 
 import gtk, gobject
-from gtk import Image
+# from gtk import Image
 
 import urllib2
 import logging
@@ -37,10 +37,10 @@ def loaderFromUrl( imageUrl ):
     
     try:
         response = urllib2.urlopen( imageUrl )
-    except urllib2.HTTPError as err:
+    except urllib2.HTTPError:
         logging.exception("Unable to open url: %s", imageUrl)
         return None
-    except ValueError as err:
+    except ValueError:
         logging.exception("Unable to open url: %s", imageUrl)
         return None
     except SocketError as sockerr:
@@ -54,8 +54,8 @@ def loaderFromUrl( imageUrl ):
         resp = response.read()
         loader.write( resp )            ## raises GError
         loader.close()                  ## raises GError
-    except gobject.GError as err:
-        logging.exception("Error while writing response, received data type: %", type(resp))
+    except gobject.GError:
+        logging.exception("Error while writing response, received data type: %s", type(resp))
     except:
         logging.exception("Unexpected error while writing response")
         raise
