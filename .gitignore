@@ -5,3 +5,4 @@ provider/private
 /.project
 /.pydevproject
 /.settings/
+/.gitignore
