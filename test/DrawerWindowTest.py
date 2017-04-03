@@ -19,7 +19,7 @@
 
 import unittest
 
-from DrawerWindow import DrawerWindow
+from src.DrawerWindow import DrawerWindow
 # import pygtk, gtk
 import gtk
 

@@ -22,7 +22,7 @@
 import unittest
 
 
-from Demotywatory import Demotywatory
+from src.provider.Demotywatory import Demotywatory
 
 
 class DemotywatoryTest(unittest.TestCase):

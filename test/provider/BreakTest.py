@@ -19,7 +19,7 @@
 
 import unittest
 
-from Break import Break, BreakArticleBrowser
+from src.provider.Break import Break, BreakArticleBrowser
 
 
 
