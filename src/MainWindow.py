@@ -45,7 +45,7 @@ def import_module( path ):
 #
 #
 #
-class MainWin:
+class MainWindow:
     def __init__(self, fullscreen):
         ## disable screen saver
         self.screensaver = ScreenSaverDisabler()

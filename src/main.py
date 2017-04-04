@@ -22,7 +22,7 @@
 
 import logging
 import argparse
-import WebSlideshow
+from src import MainWindow
 
 
 if __name__ == '__main__':
@@ -48,11 +48,11 @@ if __name__ == '__main__':
     
     logging.info("Loading provider: %s", args.provider)
     
-    providerClass = WebSlideshow.import_module( "provider/" + args.provider )
+    providerClass = MainWindow.import_module( "provider/" + args.provider )
     
     provider = providerClass( randomMode )              ## call constructor
     
-    mainW = WebSlideshow.MainWin(not args.nofs)
+    mainW = MainWindow.MainWindow(not args.nofs)
     mainW.setProvider( provider )
     mainW.setDisplayTime( args.dtime )
     mainW.main()
