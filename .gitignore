@@ -2,7 +2,7 @@
 .kdev4/
 WebSlideshow.kdev4
 webslideshow/provider/private
-test/provider/private
+tests/provider/private
 /.project
 /.pydevproject
 /.settings/
