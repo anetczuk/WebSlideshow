@@ -22,7 +22,7 @@
 
 import logging
 import argparse
-from src import MainWindow
+import MainWindow
 
 
 if __name__ == '__main__':

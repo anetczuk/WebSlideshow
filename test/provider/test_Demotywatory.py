@@ -22,7 +22,7 @@
 import unittest
 
 
-from src.provider.Demotywatory import Demotywatory
+from webslideshow.provider.Demotywatory import Demotywatory
 
 
 class DemotywatoryTest(unittest.TestCase):

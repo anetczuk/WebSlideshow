@@ -19,7 +19,7 @@
 
 import unittest
 
-from src.provider.Break import Break, BreakArticleBrowser
+from webslideshow.provider.Break import Break, BreakArticleBrowser
 
 
 

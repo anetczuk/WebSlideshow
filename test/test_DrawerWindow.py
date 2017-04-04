@@ -19,7 +19,7 @@
 
 import unittest
 
-from src.DrawerWindow import DrawerWindow
+from webslideshow.DrawerWindow import DrawerWindow
 import gtk
 
 
