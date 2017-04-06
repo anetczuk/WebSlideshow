@@ -41,7 +41,6 @@ import ntpath
 def import_module( path ):
     moduleName = path.replace("/", ".")
     className = ntpath.basename( path )
-    
     logging.info("importing module: %s %s", moduleName, className)
     mod = importlib.import_module( moduleName )
     return getattr(mod, className)

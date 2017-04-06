@@ -52,7 +52,7 @@ if __name__ == '__main__':
     
     logging.info("Loading provider: %s", args.provider)
     
-    providerClass = MainWindow.import_module( "provider/" + args.provider )
+    providerClass = MainWindow.import_module( "webslideshow/provider/" + args.provider )
     
     provider = providerClass( randomMode )              ## call constructor
     

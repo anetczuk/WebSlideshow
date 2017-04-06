@@ -3,5 +3,5 @@
 
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-python $SCRIPT_DIR/webslideshow/main.py $@
-
+cd $SCRIPT_DIR
+python -m webslideshow.main $@
